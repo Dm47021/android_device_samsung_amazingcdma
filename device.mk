@@ -176,7 +176,8 @@ PRODUCT_PROPERTY_OVERRIDES+= \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
 PRODUCT_PROPERTY_OVERRIDES+= \
-    persist.sys.purgeable_assets=1
+    persist.sys.purgeable_assets=1 \
+    sys.mem.max_hidden_apps=3
 
 PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=false \

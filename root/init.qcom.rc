@@ -26,6 +26,7 @@
 #
 
 import init.qcom.usb.rc
+import init.target.rc
 
 on init
     # Set permissions for persist partition
@@ -36,27 +37,6 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
-on emmc-fs
-# mount mmc partitions
-    mount ext4 /dev/block/mmcblk0p16 /system  barrier=1
-# Remount /system ro to protect the filesystem
-    mount ext4 /dev/block/mmcblk0p16 /system wait ro remount
-
-    wait /dev/block/mmcblk0p18
-#exec /system/bin/e2fsck -v -y /dev/block/mmcblk0p18
-	exec sfsck /dev/block/mmcblk0p18 ext4
-    mount ext4 /dev/block/mmcblk0p18 /data nosuid nodev barrier=1 noauto_da_alloc,discard
-    #mount ext4 /dev/block/mmcblk0p11 /persist nosuid nodev barrier=1
-	exec sfsck /dev/block/mmcblk0p17 ext4
-    mount ext4 /dev/block/mmcblk0p17 /cache nosuid nodev barrier=1
-
-    wait /dev/block/mmcblk0p19
-
-	exec sfsck /dev/block/mmcblk0p19 ext4
-    mount ext4 /dev/block/mmcblk0p19 /efs nosuid nodev barrier=1
-    chown radio system /efs
-    chmod 0771 /efs
-
     exec system/bin/btnvtool -O
 # code added by chandan.k1
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"

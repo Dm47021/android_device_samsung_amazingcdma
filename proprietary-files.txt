@@ -13,6 +13,11 @@
 # limitations under the License.
 
 ## Bin
+bin/ATFWD-daemon
+bin/cnd
+bin/drmserver
+bin/fmconfig
+bin/hostapd_cli
 bin/usbhub
 bin/usbhub_init
 
@@ -74,6 +79,7 @@ bin/wlandutservice
 
 ## Bluetooth
 bin/abtfilt
+bin/btnvtool
 bin/hci_qcomm_init
 etc/init.qcom.bt.sh
 	

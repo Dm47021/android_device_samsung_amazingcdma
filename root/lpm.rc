@@ -29,10 +29,10 @@ loglevel 3
 on emmc-fs
 # mount mmc partitions
     wait /dev/block/mmcblk0p16
-    mount ext4 /dev/block/mmcblk0p16 /system barrier=1
+    mount ext4 /dev/block/mmcblk0p16 /system barrier=0
 #    wait /dev/block/mmcblk0p18
 #    exec /system/bin/e2fsck -v -y /dev/block/mmcblk0p18
-#    mount ext4 /dev/block/mmcblk0p18 /data nosuid nodev barrier=1 noauto_da_alloc
+#    mount ext4 /dev/block/mmcblk0p18 /data nosuid nodev barrier=0 noauto_da_alloc
 #    mount ext4 /dev/block/mmcblk0p11 /persist nosuid nodev barrier=1
 #    mount ext4 /dev/block/mmcblk0p17 /cache nosuid nodev barrier=1
 
