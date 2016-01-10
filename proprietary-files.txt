@@ -12,13 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+## Bin
+bin/usbhub
+bin/usbhub_init
+
 ## RIL
+bin/port-bridge
+bin/qmuxd 
+bin/rild
+bin/rmt_storage
+lib/libqmi.so
+lib/libqmiservices.so
 lib/libril.so 
 lib/libsecril-client.so 
 lib/libsec-ril-cdma.so 
 lib/libdiag.so 
-bin/qmuxd 
-bin/rild
+lib/libnv.so
 
 ## OMX proprietaries
 lib/libmm-abl.so 
@@ -48,12 +57,14 @@ lib/libOmxWmaDec.so
 lib/libOmxWmvDec.so
 
 ## Camera 
+bin/mm-pp-daemon
+bin/mm-qcamera-daemon
+bin/v4l2-qcamera-app
+lib/hw/camera.msm7627a.so
+lib/libgemini.so
 lib/liboemcamera.so 
 lib/libmmjpeg.so 
-lib/libmmipl.so 
-lib/libjpeg.so 
-lib/libcamera_client.so 
-lib/libcameraservice.so 
+lib/libmmipl.so
 
 ## Atheros AR6003 firmware
 lib/modules/ath.ko 
@@ -66,9 +77,13 @@ etc/firmware/ath6k/AR6003/hw2.1.1/fw-3.bin
 bin/wlandutservice
 
 ## Bluetooth
-bin/BCM2049C0_003.001.031.0088.0094.hcd
+bin/abtfilt
+bin/hci_qcomm_init
+etc/init.qcom.bt.sh
 	
 ## Audio
+lib/libaudioalsa.so
+lib/libacc.so
 lib/libaudioeq.so 
 
 ##GPS
@@ -88,5 +103,16 @@ lib/libgsl.so
 lib/egl/egl.cfg 
 
 ## Sensor
+bin/sensorservice
 lib/hw/sensors.default.so
-lib/libacc.so
+
+## Qcom
+etc/init.qcom.coex.sh
+etc/init.qcom.composition_type.sh
+etc/init.qcom.efs.sync.sh
+etc/init.qcom.fm.sh
+etc/init.qcom.post_boot.sh
+etc/init.qcom.sdio.sh
+etc/init.qcom.wifi.sh
+lib/libqc-opt.so
+
