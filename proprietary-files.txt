@@ -1,0 +1,92 @@
+# Copyright (C) 2010 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+## RIL
+lib/libril.so 
+lib/libsecril-client.so 
+lib/libsec-ril-cdma.so 
+lib/libdiag.so 
+bin/qmuxd 
+bin/rild
+
+## OMX proprietaries
+lib/libmm-abl.so 
+lib/libmm-adspsvc.so 
+lib/libOmxAacDec.so 
+libOmxAacEnc.so 
+lib/libOmxAdpcmDec.so 
+lib/libOmxAmrDec.so 
+lib/libOmxAmrEnc.so 
+lib/libOmxAmrRtpDec.so 
+lib/libOmxAmrwbDec.so 
+lib/libOmxCore.so 
+lib/libOmxEvrcDec.so 
+lib/libOmxEvrcEnc.so 
+lib/libOmxEvrcHwDec.so 
+lib/libOmxH264Dec.so 
+lib/libOmxMp3Dec.so 
+lib/libOmxMpeg4Dec.so 
+lib/libOmxOn2Dec.so 
+lib/libOmxQcelp13Dec.so 
+lib/libOmxQcelp13Enc.so 
+lib/libOmxQcelpHwDec.so 
+lib/libOmxrv9Dec.so 
+lib/libOmxVidEnc.so 
+lib/libOmxVp8Dec.so 
+lib/libOmxWmaDec.so 
+lib/libOmxWmvDec.so
+
+## Camera 
+lib/liboemcamera.so 
+lib/libmmjpeg.so 
+lib/libmmipl.so 
+lib/libjpeg.so 
+lib/libcamera_client.so 
+lib/libcameraservice.so 
+
+## Atheros AR6003 firmware
+lib/modules/ath.ko 
+lib/modules/ath6kl_sdio.ko 
+lib/modules/cfg80211.ko 
+lib/modules/librasdioif.ko 
+etc/firmware/ath6k/AR6003/hw2.1.1/athtcmd_ram.bin 
+etc/firmware/ath6k/AR6003/hw2.1.1/bdata.bin 
+etc/firmware/ath6k/AR6003/hw2.1.1/fw-3.bin 
+bin/wlandutservice
+
+## Bluetooth
+bin/BCM2049C0_003.001.031.0088.0094.hcd
+	
+## Audio
+lib/libaudioeq.so 
+
+##GPS
+lib/hw/gps.msm7627a.so 
+
+## Light
+lib/hw/lights.msm7627a.so 
+	
+## 3D
+lib/egl/libGLESv1_CM_adreno200.so 
+lib/egl/libq3dtools_adreno200.so 
+lib/egl/libEGL_adreno200.so 
+lib/egl/libGLESv2_adreno200.so 
+etc/firmware/yamato_pfp.fw 
+etc/firmware/yamato_pm4.fw 
+lib/libgsl.so 
+lib/egl/egl.cfg 
+
+## Sensor
+lib/hw/sensors.default.so
+lib/libacc.so
