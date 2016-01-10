@@ -85,8 +85,8 @@ try:
 except ImportError:
   from sha import sha as sha1
 
-import amazingcdma_common as common
-import amazingcdma_edify_generator as edify_generator
+import common
+import edify_generator
 
 OPTIONS = common.OPTIONS
 OPTIONS.package_key = None

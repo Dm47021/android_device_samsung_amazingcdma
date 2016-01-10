@@ -20,7 +20,6 @@
 #
 
 # Specify phone tech before including full_phone
-$(call inherit-product, vendor/cm/config/cdma.mk)
 $(call inherit-product, device/samsung/amazingcdma/full_amazingcdma.mk)
 
 # Inherit some common CM stuff.
