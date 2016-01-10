@@ -48,8 +48,6 @@ struct ashmem_pin {
 #define ASHMEM_CACHE_CLEAN_RANGE	_IO(__ASHMEMIOC, 12)
 #define ASHMEM_CACHE_INV_RANGE		_IO(__ASHMEMIOC, 13)
 
-struct file;
-
 int get_ashmem_file(int fd, struct file **filp, struct file **vm_file,
 			unsigned long *len);
 void put_ashmem_file(struct file *file);
