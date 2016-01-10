@@ -93,13 +93,11 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/root/sbin/adbd:root/sbin/adbd \
-    device/samsung/amazingcdma/root/fstab.amazingcdma:root/fstab.amazingcdma \
-    device/samsung/amazingcdma/root/init.rc:root/init.rc \
+    device/samsung/amazingcdma/root/fstab.qcom:root/fstab.qcom \
     device/samsung/amazingcdma/root/init.qcom.rc:root/init.qcom.rc \
     device/samsung/amazingcdma/root/init.qcom.sh:root/init.qcom.sh \
     device/samsung/amazingcdma/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
     device/samsung/amazingcdma/root/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/samsung/amazingcdma/root/init.target.rc:root/init.target.rc \
     device/samsung/amazingcdma/root/lpm.rc:root/lpm.rc \
     device/samsung/amazingcdma/root/ueventd.qcom.rc:root/ueventd.qcom.rc
 
@@ -108,16 +106,21 @@ PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/recovery/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
     device/samsung/amazingcdma/recovery/fix_reboot.sh:recovery/root/sbin/fix_reboot.sh 
 
-# 3d
+# Adreno
 PRODUCT_COPY_FILES += \
-    device/samsung/amazingcdma/egl.cfg:system/lib/egl/egl.cfg 
-
-# WLAN
-PRODUCT_COPY_FILES += \
-    device/samsung/amazingcdma/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
-    device/samsung/amazingcdma/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/samsung/amazingcdma/prebuilt/etc/wifi/hostapd.conf:system/etc/wifi/hostapd.conf
-
+    device/samsung/amazingcdma/egl.cfg:system/lib/egl/egl.cfg \
+    device/samsung/amazingcdma/prebuilt/lib/egl/eglsubAndroid.so:system/lib/egl/eglsubAndroid.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
+    device/samsung/amazingcdma/prebuilt/lib/libC2D2.so:system/lib/libC2D2.so \
+    device/samsung/amazingcdma/prebuilt/lib/libgsl.so:system/lib/libgsl.so \
+    device/samsung/amazingcdma/prebuilt/lib/libOpenVG.so:system/lib/libOpenVG.so \
+    device/samsung/amazingcdma/prebuilt/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so \
+    device/samsung/amazingcdma/prebuilt/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
+    device/samsung/amazingcdma/prebuilt/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw
+   
 # Bluez
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf \

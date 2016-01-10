@@ -26,7 +26,28 @@
 #
 
 import init.qcom.usb.rc
-import init.target.rc
+
+on early-init
+
+    mount debugfs debugfs /sys/kernel/debug
+
+    ## Setup storage
+    mkdir /storage 0050 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/sdcard1 0000 system system
+
+    ## Backwards compability
+    symlink /storage/sdcard0 /mnt/sdcard
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard1 /external_sd
+    symlink /storage/sdcard1 /mnt/external_sd
+
+    export EXTERNAL_STORAGE /storage/sdcard0
+    export SECONDARY_STORAGE /storage/sdcard1
+
+on emmc-fs
+    # Mount partitions
+	mount_all /fstab.qcom
 
 on init
     # Set permissions for persist partition
@@ -35,6 +56,8 @@ on init
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+    
+    start comp-set
 
 on boot
     exec system/bin/btnvtool -O
@@ -378,6 +401,12 @@ on property:drmdiag.load=1
 on property:drmdiag.load=0
     stop drmdiag
 
+service comp-set /system/bin/sh /system/etc/init.qcom.composition_type.sh
+    user root
+    critical
+    disabled
+    oneshot
+
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
     user root
@@ -478,3 +507,14 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
     group bluetooth system net_bt_admin net_admin
     disabled
     oneshot
+
+service wlan_tool /system/bin/wlan_tool
+    class late_start
+    user root
+    group wifi system net_admin inet shell
+    oneshot
+
+on property:sys.radio.shutdown=true
+   exec /system/bin/sh /system/etc/init.qcom.efs.sync.sh
+   user root
+   group root

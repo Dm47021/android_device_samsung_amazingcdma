@@ -25,11 +25,10 @@ $(call inherit-product, device/samsung/amazingcdma/full_amazingcdma.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_RELEASE_NAME := amazing_cdma
-
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := cm_amazingcdma
-PRODUCT_DEVICE := amazingcdma
-PRODUCT_MODEL := SCH-S738C
-PRODUCT_BRAND := samsung
-PRODUCT_MANUFACTURER := samsung
+PRODUCT_RELEASE_NAME := amazingcdma
+PRODUCT_NAME         := cm_amazingcdma
+PRODUCT_DEVICE       := amazingcdma
+PRODUCT_MODEL        := SCH-S738C
+PRODUCT_BRAND        := Tracphone
+PRODUCT_MANUFACTURER := Samsung

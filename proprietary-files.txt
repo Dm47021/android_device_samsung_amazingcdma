@@ -78,7 +78,8 @@ lib/libmmipl.so
 ## Media
 etc/media_profiles.xml
 
-## Atheros AR6003 firmware
+## Wifi
+etc/wifi/wpa_supplicant.conf
 etc/firmware/ath6k/AR6003/hw2.1.1/athtcmd_ram.bin 
 etc/firmware/ath6k/AR6003/hw2.1.1/bdata.bin 
 etc/firmware/ath6k/AR6003/hw2.1.1/fw-3.bin 
@@ -94,24 +95,12 @@ etc/init.qcom.bt.sh
 lib/libaudioalsa.so
 lib/libaudioeq.so 
 
-##GPS
-lib/hw/gps.msm7627a.so 
-
 ## Light
 lib/hw/lights.msm7627a.so 
 	
-## 3D
-lib/egl/libGLESv1_CM_adreno200.so 
-lib/egl/libq3dtools_adreno200.so 
-lib/egl/libEGL_adreno200.so 
-lib/egl/libGLESv2_adreno200.so 
-etc/firmware/yamato_pfp.fw 
-etc/firmware/yamato_pm4.fw 
-lib/libgsl.so 
-lib/egl/egl.cfg 
-
 ## Sensor
 bin/sensorservice
+lib/libacdapi_azi.so
 lib/hw/sensors.default.so
 
 ## Qcom
