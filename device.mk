@@ -127,25 +127,30 @@ PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/keylayout/sec_powerkey.kl:system/usr/keylayout/sec_powerkey.kl \
     device/samsung/amazingcdma/keylayout/surf_keypad.kl:system/usr/keylayout/surf_keypad.kl
 
-PRODUCT_PROPERTY_OVERRIDES := \
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bluetooth.request.master=true \
+    ro.qualcomm.bluetooth.ftp=true \
+    ro.qualcomm.bluetooth.sap=true \
+    ro.bluetooth.remote.autoconnect=true \
+    ro.emmc.sdcard.partition=18 
+    
+PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     ro.com.android.dateformat=dd-MM-yyyy \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
     ro.media.dec.jpeg.memcap=10000000
 
 PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=pdp0,wlan0,gprs,ppp0 \
-    ro.telephony.ril_class=samsung \
+    ro.telephony.ril_class=SamsungRIL \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
-    ro.com.android.dataroaming=false
+    ro.com.android.dataroaming=false \
+    ro.cdma.operator.numeric=310000 \
+    ro.cdma.operator.alpha=TracFone 
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=160 
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 # This should not be needed but on-screen keyboard uses the wrong density without it.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -155,13 +160,28 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.locationfeatures=1 \
     ro.setupwizard.enable_bypass=1 \
     ro.media.dec.jpeg.memcap=20000000 \
-    dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y \
-    dalvik.vm.heapsize=64m \
+    ro.opengles.version=131072 
+
+# Dalvik
+PRODUCT_TAGS += \
+    dalvik.vm.checkjni=0 \
+    dalvik.gc.type-precise \
     dalvik.vm.execution-mode=int:jit \
-    dalvik.vm.dexopt-data-only=1 \
-    ro.opengles.version=131072  \
-    ro.compcache.default=0
+    dalvik.vm.dexopt-flags=v=a,o=v,m=y,u=y \
+    dalvik.vm.heapstartsize=5m \
+    dalvik.vm.heapgrowthlimit=36m \
+    dalvik.vm.heapsize=64m 
+
+PRODUCT_PROPERTY_OVERRIDES+= \
+    ro.vendor.extension_library=/system/lib/libqc-opt.so
+
+PRODUCT_PROPERTY_OVERRIDES+= \
+    persist.sys.purgeable_assets=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    lpa.decode=false \
+    tunnel.decode=true \
+    lpa.use-stagefright=true
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
