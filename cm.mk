@@ -19,9 +19,6 @@
 # product configuration (apps).
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 # Specify phone tech before including full_phone
 $(call inherit-product, vendor/cm/config/cdma.mk)
 $(call inherit-product, device/samsung/amazingcdma/full_amazingcdma.mk)

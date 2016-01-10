@@ -100,6 +100,7 @@ BOARD_USES_LEGACY_RIL := true
 BOARD_MOBILEDATA_INTERFACE_NAME:= "pdp0"
 
 # Kernel
+TARGET_PROVIDES_INIT_RC := true
 TARGET_PREBUILT_KERNEL := device/samsung/amazingcdma/zImage
 TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/amazingcdma/recovery_kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom

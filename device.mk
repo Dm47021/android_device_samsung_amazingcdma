@@ -19,63 +19,72 @@
 # product configuration (apps).
 #
 
-# Inherit from those products. Most specific first.
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, build/target/product/full.mk)
 
-#$(call inherit-product, device/common/gps/gps_eu_supl.mk)
+$(call inherit-product, build/target/product/languages_small.mk)
+$(call inherit-product, vendor/cm/config/common.mk)
 
-#DEVICE_PACKAGE_OVERLAYS := device/samsung/amazingcdma/overlay
+# The gps config appropriate for this device
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
+
+DEVICE_PACKAGE_OVERLAYS := device/samsung/amazingcdma/overlay
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_amazingcdma
 PRODUCT_DEVICE := amazingcdma
 PRODUCT_MODEL := SCH-S738C
 
+## Audio
 PRODUCT_PACKAGES += \
-    camera.msm7x27a \
-    copybit.msm7x27a \
-    gralloc.msm7x27a \
-    hwcomposer.msm7x27a \
-    gps.msm7x27a \
-    lights.msm7x27a \
     audio.primary.msm7x27a \
     audio_policy.msm7x27a \
-    audio.a2dp.default
-
-PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libOmxCore \
-    libOmxVenc \
-    libOmxVdec \
-    libstagefrighthw
-
-PRODUCT_PACKAGES += \
-    badblocks \
-    e2fsck \
-    e2label \
-    mke2fs \
-    mke2fs.conf \
-    resize2fs \
-    tune2fs \
-    make_ext4fs \
-    setup_fs
-
-PRODUCT_PACKAGES += \
-    hciconfig \
-    hcitool \
+    audio.a2dp.default \
+    audio_policy.conf \
     libaudioutils
 
+## Bluetooth
+PRODUCT_PACKAGES += \
+    hciconfig \
+    hcitool
+
+## Graphics
+PRODUCT_PACKAGES += \
+    copybit.msm7x27a \
+    gralloc.msm7x27a \
+    hwcomposer.msm7x27a
+
+## GPS
+PRODUCT_PACKAGES += \
+    gps.msm7x27a \
+
+## Misc
+PRODUCT_PACKAGES += \
+    make_ext4fs \
+    setup_fs \
+    com.android.future.usb.accessory
+
+## Omx
+PRODUCT_PACKAGES += \
+    libstagefrighthw \
+    libmm-omxcore \
+    libOmxCore
+
+## Power 
+PRODUCT_PACKAGES += \
+    power.msm7x27a
+
+# Live Wallpapers
+PRODUCT_PACKAGES += \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    librs_jni 
+
+
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/samsung/amazingcdma/kernel
+	LOCAL_KERNEL := device/samsung/amazingcdma/zImage
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
-
-PRODUCT_PACKAGES += \
-       sec_touchscreen.kcm \
-       sec_jack.kcm \
-       sec_key.kcm
 
 # fstab
 PRODUCT_COPY_FILES += \
@@ -103,29 +112,21 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/egl.cfg:system/lib/egl/egl.cfg 
 
-# WLAN + BT
+# WLAN
 PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/samsung/amazingcdma/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/samsung/amazingcdma/prebuilt/etc/wifi/hostapd.conf:system/etc/wifi/hostapd.conf
-    
-# Install the features available on this device.
-PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
-    frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
 
-#Media profile
+# Bluez
 PRODUCT_COPY_FILES += \
-    device/samsung/amazingcdma/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
-    device/samsung/amazingcdma/prebuilt/audio.conf:system/etc/bluetooth/audio.conf
+    system/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf \
+    system/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf \
+    system/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf \
+    system/bluetooth/data/input.conf:system/etc/bluetooth/input.conf \
+    system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf \
+    system/bluetooth/data/network.conf:system/etc/bluetooth/network.conf
+
 ## keymap
 PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
@@ -203,4 +204,4 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/amazingcdma/amazing_cdma-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/amazingcdma/amazingcdma-vendor.mk)

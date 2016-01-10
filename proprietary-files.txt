@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+## Apns
+etc/apns-conf.xml
+
 ## Bin
 bin/ATFWD-daemon
 bin/cnd
@@ -71,6 +74,9 @@ lib/libgemini.so
 lib/liboemcamera.so 
 lib/libmmjpeg.so 
 lib/libmmipl.so
+
+## Media
+etc/media_profiles.xml
 
 ## Atheros AR6003 firmware
 etc/firmware/ath6k/AR6003/hw2.1.1/athtcmd_ram.bin 
