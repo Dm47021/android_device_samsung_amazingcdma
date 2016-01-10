@@ -20,6 +20,7 @@ bin/fmconfig
 bin/hostapd_cli
 bin/usbhub
 bin/usbhub_init
+bin/wlandutservice
 
 ## RIL
 bin/port-bridge

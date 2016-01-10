@@ -83,11 +83,20 @@ PRODUCT_COPY_FILES += \
 
 # Init
 PRODUCT_COPY_FILES += \
+    device/samsung/amazingcdma/root/sbin/adbd:root/sbin/adbd \
+    device/samsung/amazingcdma/root/fstab.amazingcdma:root/fstab.amazingcdma \
+    device/samsung/amazingcdma/root/init.rc:root/init.rc \
     device/samsung/amazingcdma/root/init.qcom.rc:root/init.qcom.rc \
-    device/samsung/amazingcdma/recovery/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
+    device/samsung/amazingcdma/root/init.qcom.sh:root/init.qcom.sh \
     device/samsung/amazingcdma/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
+    device/samsung/amazingcdma/root/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    device/samsung/amazingcdma/root/init.target.rc:root/init.target.rc \
     device/samsung/amazingcdma/root/lpm.rc:root/lpm.rc \
-    device/samsung/amazingcdma/root/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    device/samsung/amazingcdma/root/ueventd.qcom.rc:root/ueventd.qcom.rc
+
+# Recovery Init
+PRODUCT_COPY_FILES += \
+    device/samsung/amazingcdma/recovery/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
     device/samsung/amazingcdma/recovery/fix_reboot.sh:recovery/root/sbin/fix_reboot.sh 
 
 # 3d

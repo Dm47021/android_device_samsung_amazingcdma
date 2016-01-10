@@ -162,3 +162,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 
 # Create Odex Files
 WITH_DEXPREOPT := true
+
+# Releasetools
+TARGET_PROVIDES_RELEASETOOLS := true
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/amazingcdma/releasetools/amazingcdma_ota_from_target_files
+
