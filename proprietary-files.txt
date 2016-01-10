@@ -33,7 +33,7 @@ lib/libnv.so
 lib/libmm-abl.so 
 lib/libmm-adspsvc.so 
 lib/libOmxAacDec.so 
-libOmxAacEnc.so 
+lib/libOmxAacEnc.so 
 lib/libOmxAdpcmDec.so 
 lib/libOmxAmrDec.so 
 lib/libOmxAmrEnc.so 
@@ -79,7 +79,6 @@ etc/init.qcom.bt.sh
 	
 ## Audio
 lib/libaudioalsa.so
-lib/libacc.so
 lib/libaudioeq.so 
 
 ##GPS
