@@ -41,9 +41,8 @@ TARGET_BOARD_PLATFORM := msm7x27a
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT_CPU := cortex-a5
-TARGET_CPU_ABI := armeabi-v6l
+TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv6-vfp
 
 # Bionic Optimization
 TARGET_CORTEX_CACHE_LINE_32 := true
