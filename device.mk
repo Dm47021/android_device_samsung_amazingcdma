@@ -19,6 +19,8 @@
 # product configuration (apps).
 #
 
+PRODUCT_LOCALES += mdpi
+
 $(call inherit-product, build/target/product/full.mk)
 
 $(call inherit-product, build/target/product/languages_small.mk)
