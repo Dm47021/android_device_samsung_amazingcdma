@@ -36,7 +36,21 @@ PRODUCT_NAME := full_amazingcdma
 PRODUCT_DEVICE := amazingcdma
 PRODUCT_MODEL := SCH-S738C
 
-## Audio
+# Permissions
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+
+# Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm7x27a \
     audio_policy.msm7x27a \
@@ -44,38 +58,38 @@ PRODUCT_PACKAGES += \
     audio_policy.conf \
     libaudioutils
 
-## Bluetooth
+# Bluetooth
 PRODUCT_PACKAGES += \
     hciconfig \
     hcitool
 
-## Graphics
+# Graphics
 PRODUCT_PACKAGES += \
     copybit.msm7x27a \
     gralloc.msm7x27a \
     hwcomposer.msm7x27a
 
-## GPS
+# GPS
 PRODUCT_PACKAGES += \
     gps.msm7x27a \
 
-## Lights
+# Lights
 PRODUCT_PACKAGES += \
     lights.msm7x27a \
 
-## Misc
+# Misc
 PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs \
     com.android.future.usb.accessory
 
-## Omx
+# Omx
 PRODUCT_PACKAGES += \
     libstagefrighthw \
     libmm-omxcore \
     libOmxCore
 
-## Power 
+# Power 
 PRODUCT_PACKAGES += \
     power.msm7x27a
 
@@ -125,6 +139,12 @@ PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/prebuilt/lib/egl/libsc-a2xx.so:system/lib/libsc-a2xx.so \
     device/samsung/amazingcdma/prebuilt/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
     device/samsung/amazingcdma/prebuilt/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw
+
+# Audio
+PRODUCT_COPY_FILES += \
+    device/samsung/amazingcdma/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    device/samsung/amazingcdma/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+    device/samsung/amazingcdma/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv
    
 # Bluez
 PRODUCT_COPY_FILES += \
@@ -135,7 +155,7 @@ PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf \
     system/bluetooth/data/network.conf:system/etc/bluetooth/network.conf
 
-## keymap
+# keymap
 PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
     device/samsung/amazingcdma/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
@@ -144,6 +164,17 @@ PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
     device/samsung/amazingcdma/keylayout/sec_powerkey.kl:system/usr/keylayout/sec_powerkey.kl \
     device/samsung/amazingcdma/keylayout/surf_keypad.kl:system/usr/keylayout/surf_keypad.kl
+
+# Media 
+PRODUCT_COPY_FILES += \
+    device/samsung/amazingcdma/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    device/samsung/amazingcdma/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+
+# Sensors
+PRODUCT_COPY_FILES += \
+    device/samsung/amazingcdma/prebuilt/etc/calib.dat:system/etc/calib.dat \
+    device/samsung/amazingcdma/prebuilt/etc/param.dat:system/etc/param.dat \
+    device/samsung/amazingcdma/prebuilt/etc/sensors.dat:system/etc/sensors.dat
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -160,7 +191,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=pdp0,wlan0,gprs,ppp0 \
-    ro.telephony.ril_class=SamsungRIL \
+    ro.telephony.ril_class=SamsungMSMRIL \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
     ro.com.android.dataroaming=false \
