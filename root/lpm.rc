@@ -4,20 +4,17 @@ on early-init
 on init
 
 sysclktz 0
+
 loglevel 3
 
-
-# setup the global environment
+	## Setup the global environment
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_BOOTLOGO 1
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
-#    export ANDROID_DATA /data
-#    export EXTERNAL_STORAGE /mnt/sdcard
-#    export ASEC_MOUNTPOINT /mnt/asec
-	 export LOOP_MOUNTPOINT /mnt/obb
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
+	export LOOP_MOUNTPOINT /mnt/obb
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/mms-common.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
 
     mkdir /system
     mkdir /data 0771 system system
@@ -26,33 +23,27 @@ loglevel 3
     mkdir /config 0500 root root
     mkdir /persist 0771 system system
 
-on emmc-fs
-# mount mmc partitions
+on fs
+	# mount mmc partitions
     wait /dev/block/mmcblk0p16
-    mount ext4 /dev/block/mmcblk0p16 /system barrier=0
-#    wait /dev/block/mmcblk0p18
-#    exec /system/bin/e2fsck -v -y /dev/block/mmcblk0p18
-#    mount ext4 /dev/block/mmcblk0p18 /data nosuid nodev barrier=0 noauto_da_alloc
-#    mount ext4 /dev/block/mmcblk0p11 /persist nosuid nodev barrier=1
-#    mount ext4 /dev/block/mmcblk0p17 /cache nosuid nodev barrier=1
+    mount ext4 /dev/block/mmcblk0p16 /system barrier=1
 
 on fs
-# mount mtd partitions
+	# mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
     mount yaffs2 mtd@system /system
     mount yaffs2 mtd@system /system ro remount
-#    mount yaffs2 mtd@userdata /data nosuid nodev
-#    mount yaffs2 mtd@persist /persist nosuid nodev
-#    mount yaffs2 mtd@cache /cache nosuid nodev
-#    mount yaffs2 mtd@persist /persist nosuid nodev
     
 on boot
 	ifup lo
 	hostname localhost
 	domainname localdomain
 	class_start default
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 245760
+    chmod 666 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 666 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 122880
+
 
 service ueventd /sbin/ueventd
     critical
@@ -71,10 +62,12 @@ on property:ro.kernel.qemu=1
     start adbd
 
 service playlpm /system/bin/playlpm
+    class charger
     user root
-    oneshot  
+    oneshot
 
-service lpmkey /system/bin/lpmkey
+service lpmkey /system/bin/charging_mode
+    class charger
     user root
     oneshot
 

@@ -59,6 +59,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm7x27a \
 
+## Lights
+PRODUCT_PACKAGES += \
+    lights.msm7x27a \
+
 ## Misc
 PRODUCT_PACKAGES += \
     make_ext4fs \
@@ -98,9 +102,9 @@ PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/root/fstab.qcom:root/fstab.qcom \
     device/samsung/amazingcdma/root/init.qcom.rc:root/init.qcom.rc \
     device/samsung/amazingcdma/root/init.qcom.sh:root/init.qcom.sh \
+    device/samsung/amazingcdma/root/lpm.rc:root/lpm.rc \
     device/samsung/amazingcdma/root/init.qcom.usb.rc:root/init.qcom.usb.rc \
     device/samsung/amazingcdma/root/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/samsung/amazingcdma/root/lpm.rc:root/lpm.rc \
     device/samsung/amazingcdma/root/ueventd.qcom.rc:root/ueventd.qcom.rc
 
 # Recovery Init
@@ -116,10 +120,9 @@ PRODUCT_COPY_FILES += \
     device/samsung/amazingcdma/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
     device/samsung/amazingcdma/prebuilt/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
     device/samsung/amazingcdma/prebuilt/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
-    device/samsung/amazingcdma/prebuilt/lib/libC2D2.so:system/lib/libC2D2.so \
-    device/samsung/amazingcdma/prebuilt/lib/libgsl.so:system/lib/libgsl.so \
-    device/samsung/amazingcdma/prebuilt/lib/libOpenVG.so:system/lib/libOpenVG.so \
-    device/samsung/amazingcdma/prebuilt/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libgsl.so:system/lib/libgsl.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libOpenVG.so:system/lib/libOpenVG.so \
+    device/samsung/amazingcdma/prebuilt/lib/egl/libsc-a2xx.so:system/lib/libsc-a2xx.so \
     device/samsung/amazingcdma/prebuilt/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
     device/samsung/amazingcdma/prebuilt/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw
    
@@ -204,6 +207,9 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \
     ro.allow.mock.location=1 \
     ro.debuggable=1
+
+ADDITIONAL_DEFAULT_PROPERTIES += mtp,adb
+ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

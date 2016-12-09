@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# config.mk
 #
 # Product-specific compile-time definitions.
 #
@@ -20,10 +19,6 @@
 LOCAL_PATH:= $(call my-dir)
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/amazingcdma/include
-
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
 
 # Camera
 USE_CAMERA_STUB:= false
@@ -43,6 +38,7 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT_CPU := cortex-a5
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+ARCH_ARM_HAVE_NEON := true
 
 # Bionic Optimization
 TARGET_CORTEX_CACHE_LINE_32 := true
@@ -55,14 +51,12 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
 # Graphics
 BOARD_EGL_CFG := device/samsung/amazingcdma/egl.cfg
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-TARGET_NO_HW_VSYNC := true
-TARGET_USES_HWCOMPOSER := true
 USE_OPENGL_RENDERER := true
 TARGET_GRALLOC_USES_ASHMEM := true
-TARGET_USES_GENLOCK := true
-TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
-TARGET_AVOID_DRAW_TEXTURE_EXTENSION := true
+TARGET_NO_HW_VSYNC := false
 TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true 
+BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
+BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
 
 # Bootanimation
 TARGET_BOOTANIMATION_USE_RGB565 := true
@@ -82,7 +76,10 @@ BOARD_FM_DEVICE := bcm2049
 BOARD_USES_QCOM_LIBRPC := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7x27a
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+
+# Lights
+TARGET_PROVIDES_LIBLIGHTS := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
@@ -107,7 +104,8 @@ BOARD_USES_LEGACY_RIL := true
 BOARD_MOBILEDATA_INTERFACE_NAME:= "pdp0"
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/samsung/amazingcdma/zImage
+TARGET_KERNEL_SOURCE := kernel/samsung/amazingcdma
+TARGET_KERNEL_CONFIG := amazing_cdma_defconfig
 TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/amazingcdma/recovery_kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom
 BOARD_KERNEL_BASE := 0x00200000
