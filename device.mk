@@ -19,36 +19,18 @@
 # product configuration (apps).
 #
 
-PRODUCT_LOCALES += mdpi
+DEVICE_PACKAGE_OVERLAYS := device/samsung/amazingcdma/overlay
 
 $(call inherit-product, build/target/product/full.mk)
-
 $(call inherit-product, build/target/product/languages_small.mk)
 $(call inherit-product, vendor/cm/config/common.mk)
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-DEVICE_PACKAGE_OVERLAYS := device/samsung/amazingcdma/overlay
+# Dalvik
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-# Discard inherited values and use our own instead.
-PRODUCT_NAME := full_amazingcdma
-PRODUCT_DEVICE := amazingcdma
-PRODUCT_MODEL := SCH-S738C
-
-# Permissions
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -62,6 +44,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hciconfig \
     hcitool
+
+# Camera
+#PRODUCT_PACKAGES += \
+#    camera.msm7x27a
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -100,11 +86,19 @@ PRODUCT_PACKAGES += \
     librs_jni 
 
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/samsung/amazingcdma/zImage
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
+# Permissions
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
 # fstab
 PRODUCT_COPY_FILES += \
@@ -190,8 +184,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=10000000
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    mobiledata.interfaces=pdp0,wlan0,gprs,ppp0 \
-    ro.telephony.ril_class=SamsungMSMRIL \
+    rild.libpath=/system/lib/libsec-ril-cdma.so \
+    rild.libargs=-d /dev/ttyS0 \
+    ro.telephony.ril_class=SamsungRIL \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.call_ring.delay=3000 \
+    mobiledata.interfaces=pdp0,gprs,ppp0 \
+    DEVICE_PROVISIONED=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
     ro.com.android.dataroaming=false \
@@ -233,6 +234,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     tunnel.decode=true \
     lpa.use-stagefright=true
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp,adb \
+    persist.service.adb.enable=1 \
+    ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1 \
+    ro.vold.umsdirtyratio=50 \
+
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \
@@ -242,8 +249,20 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 ADDITIONAL_DEFAULT_PROPERTIES += mtp,adb
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 
-# See comment at the top of this file. This is where the other
-# half of the device-specific product definition file takes care
-# of the aspects that require proprietary drivers that aren't
-# commonly available
+# Vendor Blobs
 $(call inherit-product-if-exists, vendor/samsung/amazingcdma/amazingcdma-vendor.mk)
+
+# This is an MDPI device
+PRODUCT_AAPT_CONFIG := normal mdpi
+PRODUCT_AAPT_PREF_CONFIG := mdpi
+PRODUCT_LOCALES += mdpi
+
+# Other
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=2
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+
+# Discard inherited values and use our own instead.
+PRODUCT_NAME := full_amazingcdma
+PRODUCT_DEVICE := amazingcdma
+PRODUCT_MODEL := SCH-S738C

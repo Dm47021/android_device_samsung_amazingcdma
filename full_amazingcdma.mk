@@ -25,7 +25,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/samsung/amazingcdma/device.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-PRODUCT_RELEASE_NAME := amazing_cdma
+PRODUCT_RELEASE_NAME := amazingcdma
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_amazingcdma
@@ -33,5 +33,5 @@ PRODUCT_DEVICE := amazingcdma
 PRODUCT_MODEL := SCH-S738C
 
 DEFAULT_PROPERTY_OVERRIDES += \
-    ro.build.product=amazing_cdma \
-    ro.product.device=amazing_cdma
+    ro.build.product=amazingcdma \
+    ro.product.device=amazingcdma

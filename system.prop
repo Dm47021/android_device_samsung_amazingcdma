@@ -2,8 +2,6 @@
 # system.prop for trebon
 #
 
-rild.libpath=/system/lib/libsec-ril.so
-rild.libargs=-d /dev/smd0
 ro.ril.samsung_cdma = true
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
