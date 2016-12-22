@@ -184,15 +184,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=10000000
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libsec-ril-cdma.so \
-    rild.libargs=-d /dev/ttyS0 \
-    ro.telephony.ril_class=SamsungRIL \
-    ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=3000 \
-    mobiledata.interfaces=pdp0,gprs,ppp0 \
-    DEVICE_PROVISIONED=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
     ro.com.android.dataroaming=false \
@@ -201,10 +192,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=160 
-
-# This should not be needed but on-screen keyboard uses the wrong density without it.
-PRODUCT_PROPERTY_OVERRIDES += \
-    qemu.sf.lcd_density=160
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.locationfeatures=1 \
@@ -221,9 +208,6 @@ PRODUCT_TAGS += \
     dalvik.vm.heapstartsize=5m \
     dalvik.vm.heapgrowthlimit=36m \
     dalvik.vm.heapsize=64m 
-
-PRODUCT_PROPERTY_OVERRIDES+= \
-    ro.vendor.extension_library=/system/lib/libqc-opt.so
 
 PRODUCT_PROPERTY_OVERRIDES+= \
     persist.sys.purgeable_assets=1 \
